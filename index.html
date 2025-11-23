@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shiva's Cybersecurity Portfolio</title>
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter font family --><style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* Deep Charcoal/GitHub Dark background */
+            color: #c9d1d9; /* Light text */
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Custom Neon Blue Glow Color */
+        .neon-blue { color: #00e0ff; }
+        .bg-neon-blue { background-color: #00e0ff; }
+        .border-neon-blue { border-color: #00e0ff; }
+
+        /* Custom class for scroll animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hover effect for Project Cards */
+        .project-card {
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 0 transparent;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 224, 255, 0.5); /* Neon glow on hover */
+            border-color: #00e0ff;
+        }
+
+        /* Typing effect for Hero tagline */
+        #tagline::after {
+            content: '|';
+            animation: blink-caret .75s step-end infinite;
+            display: inline-block;
+            margin-left: 4px;
+        }
+        @keyframes blink-caret {
+            from, to { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* Glitch effect on skill hover */
+        .skill-tag {
+            transition: all 0.1s;
+        }
+        .skill-tag:hover {
+            box-shadow: 0 0 10px rgba(76, 255, 0, 0.7); /* Neon Green Glow */
+            transform: scale(1.05);
+            animation: glitch 0.5s infinite alternate;
+            cursor: pointer;
+        }
+
+        @keyframes glitch {
+          0% { transform: translate(1px, 1px) rotate(0deg); }
+          25% { transform: translate(-1px, -2px) rotate(-1deg); }
+          50% { transform: translate(-3px, 0px) rotate(1deg); }
+          75% { transform: translate(1px, 2px) rotate(-1deg); }
+          100% { transform: translate(1px, -1px) rotate(0deg); }
+        }
+
+        /* Hero image glow/border */
+        .hero-image-container {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden; /* Ensures scanline stays within bounds */
+        }
+        .hero-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(0, 224, 255, 0.3);
+            box-shadow: 0 0 30px rgba(0, 224, 255, 0.3);
+            transition: all 0.3s ease-in-out;
+        }
+        .hero-image:hover {
+            border-color: rgba(0, 224, 255, 0.8);
+            box-shadow: 0 0 40px rgba(0, 224, 255, 0.6);
+            transform: scale(1.02);
+        }
+
+        /* Scanline effect for images */
+        .scanline-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                rgba(0, 224, 255, 0.05) 5%, /* Subtle blue tint */
+                transparent 100%
+            );
+            background-size: 100% 10px; /* Adjust height of scanlines */
+            animation: scanline 8s linear infinite; /* Adjust speed */
+            opacity: 0.3; /* Subtle */
+            pointer-events: none; /* Make sure it doesn't block interactions */
+        }
+
+        @keyframes scanline {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+        
+        /* Loading spinner for LLM actions */
+        .loader {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #00e0ff;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+    </style>
+</head>
+<body class="selection:bg-neon-blue selection:text-gray-900">
+
+    <!-- Navbar --><nav class="sticky top-0 z-50 bg-gray-900/90 backdrop-blur-sm shadow-lg border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <span class="text-2xl font-bold neon-blue font-mono">&lt;Shiva/&gt;</span>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <a href="#about" class="text-gray-300 hover:text-neon-blue px-3 py-2 rounded-md text-sm font-medium transition duration-150">About</a>
+                    <a href="#skills" class="text-gray-300 hover:text-neon-blue px-3 py-2 rounded-md text-sm font-medium transition duration-150">Skills</a>
+                    <a href="#projects" class="text-gray-300 hover:text-neon-blue px-3 py-2 rounded-md text-sm font-medium transition duration-150">Projects</a>
+                    <a href="#contact" class="text-gray-300 hover:text-neon-blue px-3 py-2 rounded-md text-sm font-medium transition duration-150">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
+
+        <!-- 🎯 HERO SECTION --><section id="hero" class="min-h-[80vh] flex flex-col-reverse lg:flex-row justify-center items-center lg:items-start pt-16 gap-12 scroll-reveal">
+            
+            <div class="w-full lg:w-2/3 flex flex-col justify-center items-start text-center lg:text-left">
+                <p class="text-xl sm:text-2xl text-gray-400 mb-4 font-mono">Hi, I’m <span class="text-neon-blue">Shiva</span> —</p>
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6">
+                    Cybersecurity Researcher, <br>
+                    Ethical Hacker & Full-Stack Developer.
+                </h1>
+                <p id="tagline" class="text-2xl sm:text-3xl lg:text-4xl font-semibold text-gray-300 min-h-10"></p>
+                <p class="mt-8 text-lg sm:text-xl text-gray-500 max-w-3xl">
+                    I build secure, intelligent systems that protect people in the real world.
+                    My work spans Android security, custom firewall systems, cloud-based monitoring platforms, and advanced network defense automation.
+                </p>
+                <a href="#projects" class="mt-10 inline-block px-8 py-3 text-lg font-semibold rounded-full bg-neon-blue text-gray-900 shadow-xl transition duration-300 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(0,224,255,0.7)]">
+                    View Projects &rarr;
+                </a>
+            </div>
+
+            <div class="w-full lg:w-1/3 flex justify-center lg:justify-end items-center mt-8 lg:mt-0">
+                <div class="hero-image-container w-64 h-64 sm:w-80 sm:h-80 relative">
+                    <!-- IMPORTANT: Replace the src below with your actual image URL/path -->
+                    <img src="IMG_20251105_024921.jpg" alt="Shiva - Cybersecurity Researcher" class="hero-image object-cover w-full h-full">
+                    <div class="scanline-overlay"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 👤 ABOUT ME SECTION --><section id="about" class="pt-10 scroll-reveal">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-8 border-b-2 border-neon-blue/50 pb-2">
+                <span class="neon-blue">01.</span> About Me
+            </h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="space-y-6 text-gray-300 text-lg">
+                    <p>
+                        I’m a cybersecurity researcher and full-stack developer passionate about solving real-world digital threats through engineering.
+                    </p>
+                    <p>
+                        My journey started early — experimenting with networks, breaking things ethically, and securing them better. Over time, I moved into deep system design, ethical hacking, device-level security, and cloud automation.
+                    </p>
+                    <p class="font-semibold text-white">
+                        Right now, I’m building **Safenex Firewall** — a multi-device security platform with VPN-based IDS/IPS, live monitoring, and cloud dashboards.
+                    </p>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold neon-blue">Specializations:</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start"><span class="text-neon-blue mr-3 mt-1 text-lg">&gt;</span> Ethical Hacking & Network Security</li>
+                        <li class="flex items-start"><span class="text-neon-blue mr-3 mt-1 text-lg">&gt;</span> Secure Backend Development with Flask, Django, PostgreSQL</li>
+                        <li class="flex items-start"><span class="text-neon-blue mr-3 mt-1 text-lg">&gt;</span> Custom Android Security Systems (APK-level firewalls, monitoring, IDS/IPS)</li>
+                        <li class="flex items-start"><span class="text-neon-blue mr-3 mt-1 text-lg">&gt;</span> Cloud Deployments with VPS, Docker, Caddy, Cloudflare</li>
+                        <li class="flex items-start"><span class="text-neon-blue mr-3 mt-1 text-lg">&gt;</span> AI-driven detection & automation tools</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 🚀 WHAT I DO / SERVICES SECTION --><section id="services" class="pt-10 scroll-reveal">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-12 text-center">
+                <span class="neon-blue">02.</span> What I Do
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Service Card 1: Ethical Hacking --><div class="p-6 bg-gray-800 border border-gray-700 rounded-xl shadow-lg hover:border-neon-blue transition duration-300 group">
+                    <div class="text-3xl neon-blue mb-4 group-hover:scale-105 transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8"><path d="M14.5 10c-.8-.6-1.3-2-2-3-.3-.7-.6-1.4-.7-2.1l-.1-.9C11.3 3 10 2 9 2H7c-1.1 0-2 .9-2 2v1l-.4.3C4.2 5.7 4 6.3 4 7c0 .4-.1.8-.3 1.2-.2.4-.5.7-.9.9-.4.2-.8.3-1.3.3L2 9.5c.3 1.1.7 2.1 1.2 3.1.5 1 1 1.9 1.7 2.8.7.9 1.5 1.7 2.3 2.5.8.8 1.6 1.5 2.5 2.1.9.6 1.8 1 2.8 1.4L13 22c.5-.1 1-.2 1.4-.4.4-.2.8-.5 1.1-.9.3-.4.5-.8.6-1.3.1-.5.1-1 .1-1.6V17c0-1.1-.9-2-2-2h-2c-.9 0-2-1.3-2-2.3v-2.1L12 11c.7-.6 1.2-1.3 1.5-2.2.3-.9.4-1.8.3-2.7L14.5 10z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Ethical Hacking</h3>
+                    <p class="text-gray-400">Penetration testing, vulnerability assessment, device security enhancement, Android/Network/system-level exploit research.</p>
+                </div>
+
+                <!-- Service Card 2: Full-Stack Development --><div class="p-6 bg-gray-800 border border-gray-700 rounded-xl shadow-lg hover:border-neon-blue transition duration-300 group">
+                    <div class="text-3xl neon-blue mb-4 group-hover:scale-105 transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Full-Stack Development</h3>
+                    <p class="text-gray-400">Python, Django, Flask, REST APIs, Dashboards, Databases, Cloud-based backend architecture.</p>
+                </div>
+
+                <!-- Service Card 3: Cloud Infrastructure --><div class="p-6 bg-gray-800 border border-gray-700 rounded-xl shadow-lg hover:border-neon-blue transition duration-300 group">
+                    <div class="text-3xl neon-blue mb-4 group-hover:scale-105 transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8"><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M4.93 19.07l1.41-1.41"/><path d="M17.66 6.34l1.41-1.41"/><path d="M12 18a6 6 0 0 0 0-12c-3.1 0-5.4 1.2-5.4 1.2S1 10 1 12s5 7 5 7h6"/></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Cloud Infrastructure</h3>
+                    <p class="text-gray-400">Docker, VPS setup, Caddy, Nginx, SSL, Cloudflare, origin certificates, reverse proxies.</p>
+                </div>
+
+                <!-- Service Card 4: Android Security --><div class="p-6 bg-gray-800 border border-gray-700 rounded-xl shadow-lg hover:border-neon-blue transition duration-300 group">
+                    <div class="text-3xl neon-blue mb-4 group-hover:scale-105 transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Android Security</h3>
+                    <p class="text-gray-400">APK firewalls, real-time monitoring agents, VPN services, privacy-focused defense apps.</p>
+                </div>
+
+                <!-- Service Card 5: Cyber-Defense Automation --><div class="p-6 bg-gray-800 border border-gray-700 rounded-xl shadow-lg hover:border-neon-blue transition duration-300 group">
+                    <div class="text-3xl neon-blue mb-4 group-hover:scale-105 transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8"><path d="M4 14a1 1 0 0 1-.78-1.63L14.33 1.06a1 1 0 0 1 1.76.62l-3.5 19.14a1 1 0 0 1-1.76-.62L4.78 14.37A1 1 0 0 1 4 14z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Cyber-Defense Automation</h3>
+                    <p class="text-gray-400">Custom IDS/IPS, spoofing detection, hotspot monitoring, packet analysis, threat logging.</p>
+                </div>
+
+                <!-- Service Card 6: Security Research --><div class="p-6 bg-gray-800 border border-gray-700 rounded-xl shadow-lg hover:border-neon-blue transition duration-300 group">
+                    <div class="text-3xl neon-blue mb-4 group-hover:scale-105 transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8"><path d="M17 19H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2z"/><path d="M12 8l-4 4 4 4"/><path d="M16 12h-8"/></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Security Research</h3>
+                    <p class="text-gray-400">Advanced Android payload analysis, Wi-Fi security research (MITM detection), DVR and IoT penetration research, AI-assisted threat analysis.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 🔧 SKILLS SECTION --><section id="skills" class="pt-10 scroll-reveal">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-8 border-b-2 border-neon-blue/50 pb-2">
+                <span class="neon-blue">03.</span> Core Skillset
+            </h2>
+
+            <div class="space-y-6">
+                <p class="text-gray-400 text-lg">My expertise covers the full spectrum from exploiting vulnerabilities to engineering secure, scalable solutions. Here is my operational stack:</p>
+                <div class="flex flex-wrap gap-4 text-sm">
+                    <!-- Security --><span class="skill-tag px-4 py-2 bg-red-900/50 text-red-300 rounded-full border border-red-700 shadow-md">Ethical Hacking</span>
+                    <span class="skill-tag px-4 py-2 bg-red-900/50 text-red-300 rounded-full border border-red-700 shadow-md">Network Analysis</span>
+                    <span class="skill-tag px-4 py-2 bg-red-900/50 text-red-300 rounded-full border border-red-700 shadow-md">Android Security</span>
+                    <span class="skill-tag px-4 py-2 bg-red-900/50 text-red-300 rounded-full border border-red-700 shadow-md">PenTesting</span>
+                    <span class="skill-tag px-4 py-2 bg-red-900/50 text-red-300 rounded-full border border-red-700 shadow-md">MITRE ATT&CK</span>
+                    <span class="skill-tag px-4 py-2 bg-red-900/50 text-red-300 rounded-full border border-red-700 shadow-md">OSINT</span>
+
+                    <!-- Backend/Languages --><span class="skill-tag px-4 py-2 bg-green-900/50 text-green-300 rounded-full border border-green-700 shadow-md">Python</span>
+                    <span class="skill-tag px-4 py-2 bg-green-900/50 text-green-300 rounded-full border border-green-700 shadow-md">Django</span>
+                    <span class="skill-tag px-4 py-2 bg-green-900/50 text-green-300 rounded-full border border-green-700 shadow-md">Flask</span>
+                    <span class="skill-tag px-4 py-2 bg-green-900/50 text-green-300 rounded-full border border-green-700 shadow-md">PostgreSQL</span>
+                    <span class="skill-tag px-4 py-2 bg-green-900/50 text-green-300 rounded-full border border-green-700 shadow-md">REST APIs</span>
+
+                    <!-- DevOps/Cloud --><span class="skill-tag px-4 py-2 bg-blue-900/50 text-blue-300 rounded-full border border-blue-700 shadow-md">Docker</span>
+                    <span class="skill-tag px-4 py-2 bg-blue-900/50 text-blue-300 rounded-full border border-blue-700 shadow-md">VPS Management</span>
+                    <span class="skill-tag px-4 py-2 bg-blue-900/50 text-blue-300 rounded-full border border-blue-700 shadow-md">Cloudflare</span>
+                    <span class="skill-tag px-4 py-2 bg-blue-900/50 text-blue-300 rounded-full border border-blue-700 shadow-md">Caddy/Nginx</span>
+                    <span class="skill-tag px-4 py-2 bg-blue-900/50 text-blue-300 rounded-full border border-blue-700 shadow-md">CI/CD</span>
+
+                    <!-- Tools --><span class="skill-tag px-4 py-2 bg-purple-900/50 text-purple-300 rounded-full border border-purple-700 shadow-md">Burp Suite</span>
+                    <span class="skill-tag px-4 py-2 bg-purple-900/50 text-purple-300 rounded-full border border-purple-700 shadow-md">Nmap</span>
+                    <span class="skill-tag px-4 py-2 bg-purple-900/50 text-purple-300 rounded-full border border-purple-700 shadow-md">Wireshark</span>
+                    <span class="skill-tag px-4 py-2 bg-purple-900/50 text-purple-300 rounded-full border border-purple-700 shadow-md">Suricata/Snort</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 🧪 KEY PROJECTS SECTION --><section id="projects" class="pt-10 scroll-reveal">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-8 border-b-2 border-neon-blue/50 pb-2">
+                <span class="neon-blue">04.</span> Key Projects
+            </h2>
+
+            <!-- 💎 LLM Feature 1: Project Idea Generator UI -->
+            <div class="bg-gray-900 p-6 rounded-xl border border-gray-700 mb-12">
+                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                    ✨ Cybersecurity Project Idea Generator
+                </h3>
+                <p class="text-gray-400 mb-4 text-sm">Need inspiration? Use the power of Gemini to generate a highly relevant, real-world project idea based on current industry trends.</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <input type="text" id="projectTopicInput" placeholder="Enter topic (e.g., IoT Security, Web3 Audits)" class="flex-grow p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-neon-blue focus:border-neon-blue transition duration-200">
+                    <button id="generateIdeaButton" onclick="generateProjectIdea()" class="flex-shrink-0 flex items-center justify-center px-6 py-3 bg-green-500 text-gray-900 font-bold rounded-lg hover:bg-green-400 transition duration-300 disabled:opacity-50">
+                        <span id="ideaButtonText">Generate Idea &rarr;</span>
+                        <div id="ideaLoader" class="loader hidden"></div>
+                    </button>
+                </div>
+                <div id="projectIdeaOutput" class="mt-4 p-4 bg-gray-800 rounded-lg border border-gray-700 min-h-12 hidden">
+                    <p id="ideaText" class="text-gray-200"></p>
+                    <div id="ideaSources" class="mt-2 text-xs text-gray-500 italic"></div>
+                </div>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+                
+                <!-- Project 1: Safenex Firewall (Featured) --><div class="project-card p-6 bg-gray-800 rounded-xl border border-gray-700 col-span-1 lg:col-span-2">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-green-400">Featured Project | 2024–2025</span>
+                    <h3 class="text-2xl font-bold text-white mt-2 mb-4 flex justify-between items-center">
+                        Safenex Firewall
+                        <span class="text-lg neon-blue">VPN / IDS/IPS</span>
+                    </h3>
+                    <p class="text-gray-400 mb-4">A next-generation mobile firewall with real-time cloud monitoring. A fully custom, cloud-connected security platform using WireGuard tunnels to protect devices against modern digital threats.</p>
+                    <p class="text-sm text-gray-500 font-mono">Technologies: Python, Django, PostgreSQL, Docker, WireGuard, Suricata.</p>
+                </div>
+
+                <!-- Project 2: DeepShield --><div class="project-card p-6 bg-gray-800 rounded-xl border border-gray-700">
+                    <h3 class="text-xl font-bold text-white mb-2">DeepShield — Deepfake Detection System</h3>
+                    <p class="text-gray-400 mb-4 text-sm">Backend for dataset automation, preprocessing, and model deployment pipeline.</p>
+                    <p class="text-xs text-gray-500 font-mono">Technologies: Python, Data Processing, Flask, Cloud Deployment.</p>
+                </div>
+
+                <!-- Project 3: Wi-Fi Threat Analyzer --><div class="project-card p-6 bg-gray-800 rounded-xl border border-gray-700">
+                    <h3 class="text-xl font-bold text-white mb-2">Wi-Fi Threat Analyzer</h3>
+                    <p class="text-gray-400 mb-4 text-sm">Python-based tool to analyze network anomalies and potential spoofing attempts in real-time.</p>
+                    <p class="text-xs text-gray-500 font-mono">Technologies: Python, Scapy, Network Profiling, Automation.</p>
+                </div>
+
+                <!-- Project 4: Cloud Automation Kit --><div class="project-card p-6 bg-gray-800 rounded-xl border border-gray-700">
+                    <h3 class="text-xl font-bold text-white mb-2">Cloud Automation Kit</h3>
+                    <p class="text-gray-400 mb-4 text-sm">A VPS-ready deployment framework engineered using Docker, Caddy (reverse proxy), and Cloudflare for scalable application deployment.</p>
+                    <p class="text-xs text-gray-500 font-mono">Technologies: Docker, Caddy, Cloudflare, Shell Scripting, DevOps.</p>
+                </div>
+
+                <!-- Project 5: Custom Admin Dashboard --><div class="project-card p-6 bg-gray-800 rounded-xl border border-gray-700">
+                    <h3 class="text-xl font-bold text-white mb-2">Custom Admin Dashboard</h3>
+                    <p class="text-gray-400 mb-4 text-sm">Role-based access system with live monitoring features and seamless REST API integration (Flask → Django Migration Ready).</p>
+                    <p class="text-xs text-gray-500 font-mono">Technologies: Flask/Django, HTML/Tailwind, REST API.</p>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- 🎓 ACADEMIC SIDE SECTION --><section id="academic" class="pt-10 scroll-reveal">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-8 border-b-2 border-neon-blue/50 pb-2">
+                <span class="neon-blue">05.</span> Academic & Certifications
+            </h2>
+            <div class="grid md:grid-cols-2 gap-12 text-gray-300">
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold neon-blue mb-3">Education & Background</h3>
+                    <p class="text-lg">
+                        **B.Tech Computer Science and Engineering** with specialization in **Cybersecurity** from **IIITK (Kottayam)**.
+                    </p>
+                    <ul class="list-disc list-inside ml-4 space-y-2 text-gray-400">
+                        <li>Focus on cryptography, network security, and secure software development.</li>
+                        <li>GPA: 9.0/10.0</li>
+                        <li>Relevant Coursework: Advanced Cryptography, Ethical Hacking, Distributed Systems Security.</li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold neon-blue mb-3">Key Certifications</h3>
+                    <ul class="space-y-4">
+                        <li class="p-3 bg-gray-800 rounded-lg border border-gray-700">
+                            <p class="font-semibold text-white">CompTIA Security+</p>
+                            <p class="text-sm text-gray-500">Mastery of core security functions, governance, risk, and compliance.</p>
+                        </li>
+                        <li class="p-3 bg-gray-800 rounded-lg border border-gray-700">
+                            <p class="font-semibold text-white">Certified Ethical Hacker (CEH)</p>
+                            <p class="text-sm text-gray-500">Validated skills in penetration testing and offensive security tactics.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 📧 CONTACT SECTION --><section id="contact" class="pt-10 scroll-reveal">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-8 border-b-2 border-neon-blue/50 pb-2 text-center">
+                <span class="neon-blue">06.</span> Get in Touch
+            </h2>
+            <div class="max-w-xl mx-auto p-8 bg-gray-900 rounded-xl shadow-2xl border border-gray-700">
+                <p class="text-gray-400 mb-6 text-center">I am available for collaborations, consulting, and full-time opportunities. Send me a message!</p>
+
+                <form id="contactForm" class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-300">Name</label>
+                        <input type="text" id="contactName" required class="mt-1 block w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:ring-neon-blue focus:border-neon-blue">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
+                        <input type="email" id="contactEmail" required class="mt-1 block w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:ring-neon-blue focus:border-neon-blue">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-300">Message</label>
+                        <textarea id="contactMessage" rows="4" required class="mt-1 block w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:ring-neon-blue focus:border-neon-blue"></textarea>
+                    </div>
+
+                    <!-- 💎 LLM Feature 2: Response Assistant Button & Output -->
+                    <div class="flex items-center space-x-3">
+                        <button type="button" id="draftResponseButton" onclick="draftAndSpeakResponse()" class="flex-grow flex items-center justify-center px-4 py-2 bg-purple-500 text-gray-900 font-bold rounded-lg hover:bg-purple-400 transition duration-300 disabled:opacity-50 text-sm">
+                            <span id="draftButtonText">✨ Draft Response (TTS)</span>
+                            <div id="draftLoader" class="loader hidden"></div>
+                        </button>
+                        <audio id="ttsAudio" controls class="hidden w-2/3"></audio>
+                    </div>
+
+                    <div id="draftOutput" class="p-3 bg-gray-700 rounded-lg text-gray-200 text-sm italic hidden"></div>
+                    <div id="draftErrorMessage" class="p-3 bg-red-900/50 rounded-lg text-red-300 text-sm hidden"></div>
+                    
+                    <button type="submit" class="w-full mt-6 px-4 py-3 text-lg font-semibold rounded-lg bg-neon-blue text-gray-900 shadow-xl transition duration-300 hover:scale-[1.01] hover:shadow-[0_0_25px_rgba(0,224,255,0.7)]">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+            
+            <div class="flex justify-center mt-10 space-x-6 text-2xl">
+                <a href="https://linkedin.com/in/shiva" target="_blank" class="text-gray-400 hover:text-neon-blue transition duration-300" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.534-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.761 7 2.761v6.474z"/></svg>
+                </a>
+                <a href="https://github.com/shiva" target="_blank" class="text-gray-400 hover:text-neon-blue transition duration-300" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.087-.731.084-.716.084-.716 1.205.084 1.839 1.237 1.839 1.237 1.07 1.833 2.807 1.304 3.492.997.107-.775.418-1.304.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.465-2.381 1.236-3.221-.124-.305-.535-1.518.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.658.242 2.871.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.923.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.563 21.82 24 17.327 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="mt-20 py-8 text-center border-t border-gray-800 text-gray-500 text-sm">
+        <p>Built by Shiva | Cybersecurity Researcher & Full-Stack Engineer.</p>
+        <p class="mt-2">Inspired by the Cyber-Noir aesthetic and powered by Gemini LLM APIs.</p>
+    </footer>
+
+    <!-- 🌐 LLM API JavaScript Logic -->
+    <script>
+        // API Configuration (Leave API key empty, Canvas will provide it at runtime)
+        const API_KEY = "";
+        const BASE_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/";
+        const LLM_MODEL = "gemini-2.5-flash-preview-09-2025";
+        const TTS_MODEL = "gemini-2.5-flash-preview-tts";
+
+        // --- Utility Functions ---
+
+        /**
+         * Generic fetch wrapper with exponential backoff for API robustness.
+         * @param {string} url - The API endpoint URL.
+         * @param {object} payload - The request body payload.
+         * @param {number} maxRetries - Maximum number of retries.
+         * @param {number} delay - Initial delay in milliseconds.
+         * @returns {Promise<object>} Parsed JSON response.
+         */
+        async function exponentialBackoffFetch(url, payload, maxRetries = 5, delay = 1000) {
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok) {
+                        return await response.json();
+                    } else if (response.status === 429 && i < maxRetries - 1) {
+                        // Too Many Requests, wait and retry
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        delay *= 2; // Exponential backoff
+                    } else {
+                        // Non-retryable error or last retry failed
+                        const errorData = await response.json();
+                        throw new Error(`API Error: ${response.status} - ${errorData.error.message}`);
+                    }
+                } catch (error) {
+                    if (i === maxRetries - 1) {
+                        throw new Error(`Fetch failed after ${maxRetries} attempts: ${error.message}`);
+                    }
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2;
+                }
+            }
+        }
+
+        /**
+         * Converts base64 PCM audio data to a WAV Blob object for playback.
+         * @param {string} base64Data - Base64 encoded signed 16-bit PCM data.
+         * @param {number} sampleRate - Sample rate of the audio (e.g., 24000).
+         * @returns {Blob} The audio data encoded in a WAV container.
+         */
+        function pcmToWav(pcm16, sampleRate) {
+            const numChannels = 1;
+            const bytesPerSample = 2; // 16-bit PCM
+
+            const buffer = new ArrayBuffer(44 + pcm16.length * bytesPerSample);
+            const view = new DataView(buffer);
+            let offset = 0;
+
+            // RIFF chunk descriptor
+            writeString(view, offset, 'RIFF'); offset += 4;
+            view.setUint32(offset, 36 + pcm16.length * bytesPerSample, true); offset += 4; // ChunkSize
+            writeString(view, offset, 'WAVE'); offset += 4;
+
+            // fmt sub-chunk
+            writeString(view, offset, 'fmt '); offset += 4;
+            view.setUint32(offset, 16, true); offset += 4; // Subchunk1Size (16 for PCM)
+            view.setUint16(offset, 1, true); offset += 2; // AudioFormat (1 for PCM)
+            view.setUint16(offset, numChannels, true); offset += 2; // NumChannels
+            view.setUint32(offset, sampleRate, true); offset += 4; // SampleRate
+            view.setUint32(offset, numChannels * sampleRate * bytesPerSample, true); offset += 4; // ByteRate
+            view.setUint16(offset, numChannels * bytesPerSample, true); offset += 2; // BlockAlign
+            view.setUint16(offset, 8 * bytesPerSample, true); offset += 2; // BitsPerSample (16)
+
+            // data sub-chunk
+            writeString(view, offset, 'data'); offset += 4;
+            view.setUint32(offset, pcm16.length * bytesPerSample, true); offset += 4; // Subchunk2Size
+
+            // PCM data
+            for (let i = 0; i < pcm16.length; i++) {
+                view.setInt16(offset, pcm16[i], true); offset += 2;
+            }
+
+            return new Blob([view], { type: 'audio/wav' });
+        }
+
+        function writeString(view, offset, str) {
+            for (let i = 0; i < str.length; i++) {
+                view.setUint8(offset + i, str.charCodeAt(i));
+            }
+        }
+
+        function base64ToArrayBuffer(base64) {
+            const binary_string = window.atob(base64);
+            const len = binary_string.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binary_string.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+
+        // --- LLM Feature 1: Project Idea Generator ---
+
+        async function generateProjectIdea() {
+            const input = document.getElementById('projectTopicInput');
+            const outputDiv = document.getElementById('projectIdeaOutput');
+            const outputText = document.getElementById('ideaText');
+            const outputSources = document.getElementById('ideaSources');
+            const button = document.getElementById('generateIdeaButton');
+            const buttonText = document.getElementById('ideaButtonText');
+            const loader = document.getElementById('ideaLoader');
+
+            const topic = input.value.trim() || 'current cybersecurity threats';
+
+            button.disabled = true;
+            buttonText.textContent = 'Generating...';
+            loader.classList.remove('hidden');
+            outputDiv.classList.add('hidden');
+            outputText.textContent = '';
+            outputSources.innerHTML = '';
+
+            const apiUrl = `${BASE_API_URL}${LLM_MODEL}:generateContent?key=${API_KEY}`;
+            const userQuery = `Generate a cutting-edge, practical cybersecurity project idea focused on ${topic}.`;
+
+            const systemPrompt = "You are a creative, world-class cybersecurity research mentor. Your goal is to provide a concise, single, highly innovative and practical cybersecurity project idea in a single paragraph (maximum 100 words). The idea must be based on current, real-time threats and include 3-5 suggested technologies or frameworks (e.g., Python, Docker, specific protocols).";
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                tools: [{ "google_search": {} }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+            };
+
+            try {
+                const result = await exponentialBackoffFetch(apiUrl, payload);
+                const candidate = result.candidates?.[0];
+
+                if (candidate && candidate.content?.parts?.[0]?.text) {
+                    const text = candidate.content.parts[0].text;
+                    let sources = [];
+                    const groundingMetadata = candidate.groundingMetadata;
+
+                    if (groundingMetadata && groundingMetadata.groundingAttributions) {
+                        sources = groundingMetadata.groundingAttributions
+                            .map(attr => ({
+                                uri: attr.web?.uri,
+                                title: attr.web?.title,
+                            }))
+                            .filter(source => source.uri && source.title);
+                    }
+
+                    outputText.textContent = text;
+                    outputSources.innerHTML = sources.length > 0 
+                        ? 'Sources: ' + sources.map((s, i) => `<a href="${s.uri}" target="_blank" class="hover:underline text-neon-blue">${s.title}</a>`).join(', ')
+                        : 'Idea generated without explicit web sources.';
+
+                    outputDiv.classList.remove('hidden');
+                } else {
+                    outputText.textContent = 'Could not generate a project idea. Please try a different topic.';
+                    outputDiv.classList.remove('hidden');
+                }
+
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                outputText.textContent = `Error generating idea: ${error.message}.`;
+                outputSources.innerHTML = 'Please check the console for details.';
+                outputDiv.classList.remove('hidden');
+            } finally {
+                button.disabled = false;
+                buttonText.textContent = 'Generate Idea →';
+                loader.classList.add('hidden');
+            }
+        }
+
+
+        // --- LLM Feature 2: Contact Response Draft (Text & TTS) ---
+
+        async function draftAndSpeakResponse() {
+            const messageInput = document.getElementById('contactMessage');
+            const message = messageInput.value.trim();
+            const draftOutput = document.getElementById('draftOutput');
+            const draftError = document.getElementById('draftErrorMessage');
+            const ttsAudio = document.getElementById('ttsAudio');
+            const button = document.getElementById('draftResponseButton');
+            const buttonText = document.getElementById('draftButtonText');
+            const loader = document.getElementById('draftLoader');
+            
+            draftOutput.classList.add('hidden');
+            draftError.classList.add('hidden');
+            ttsAudio.classList.add('hidden');
+            ttsAudio.src = '';
+
+            if (message.length < 10) {
+                draftError.textContent = 'Please enter a detailed message (at least 10 characters) to draft a response.';
+                draftError.classList.remove('hidden');
+                return;
+            }
+
+            button.disabled = true;
+            buttonText.textContent = 'Drafting & Speaking...';
+            loader.classList.remove('hidden');
+
+            try {
+                // 1. Generate Text Draft
+                const textApiUrl = `${BASE_API_URL}${LLM_MODEL}:generateContent?key=${API_KEY}`;
+                const userQuery = `Draft a warm, professional, and confident response to the following inquiry: "${message}". Ensure the draft response is concise (max 3 sentences) and highlights my relevant expertise in ethical hacking and full-stack development.`;
+
+                const textPayload = {
+                    contents: [{ parts: [{ text: userQuery }] }],
+                };
+
+                const textResult = await exponentialBackoffFetch(textApiUrl, textPayload);
+                const draftText = textResult.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                if (!draftText) {
+                    throw new Error("Could not generate text draft.");
+                }
+
+                draftOutput.textContent = draftText;
+                draftOutput.classList.remove('hidden');
+
+                // 2. Generate TTS Audio from Draft
+                const ttsApiUrl = `${BASE_API_URL}${TTS_MODEL}:generateContent?key=${API_KEY}`;
+                
+                const ttsPayload = {
+                    contents: [{ parts: [{ text: draftText }] }],
+                    generationConfig: {
+                        responseModalities: ["AUDIO"],
+                        speechConfig: {
+                            voiceConfig: {
+                                // Using 'Kore' as a firm, professional voice
+                                prebuiltVoiceConfig: { voiceName: "Kore" } 
+                            }
+                        }
+                    },
+                };
+
+                const ttsResult = await exponentialBackoffFetch(ttsApiUrl, ttsPayload);
+
+                const part = ttsResult.candidates?.[0]?.content?.parts?.[0];
+                const audioData = part?.inlineData?.data;
+                const mimeType = part?.inlineData?.mimeType;
+                
+                if (audioData && mimeType && mimeType.startsWith("audio/")) {
+                    // Extract sample rate from mimeType, e.g., 'audio/L16;rate=24000'
+                    const rateMatch = mimeType.match(/rate=(\d+)/);
+                    const sampleRate = rateMatch ? parseInt(rateMatch[1], 10) : 24000; 
+
+                    const pcmDataBuffer = base64ToArrayBuffer(audioData);
+                    const pcm16 = new Int16Array(pcmDataBuffer);
+                    const wavBlob = pcmToWav(pcm16, sampleRate);
+                    const audioUrl = URL.createObjectURL(wavBlob);
+                    
+                    ttsAudio.src = audioUrl;
+                    ttsAudio.classList.remove('hidden');
+                    ttsAudio.play();
+                } else {
+                    draftOutput.textContent += "\n\n(TTS failed: Could not generate audio data.)";
+                }
+
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                draftError.textContent = `Error processing request: ${error.message}`;
+                draftError.classList.remove('hidden');
+            } finally {
+                button.disabled = false;
+                buttonText.textContent = '✨ Draft Response (TTS)';
+                loader.classList.add('hidden');
+            }
+        }
+
+
+        // --- Portfolio Initialization ---
+
+        function typeWriter(element, text, i = 0) {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                setTimeout(() => typeWriter(element, text, i + 1), 50);
+            }
+        }
+
+        function handleScroll() {
+            const elements = document.querySelectorAll('.scroll-reveal');
+            const windowHeight = window.innerHeight;
+
+            elements.forEach(el => {
+                const elTop = el.getBoundingClientRect().top;
+                // Reveal when 80% of the element is visible
+                if (elTop < windowHeight * 0.8) {
+                    el.classList.add('visible');
+                } else {
+                    el.classList.remove('visible');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const taglineElement = document.getElementById('tagline');
+            const tagline = "Building systems. Securing futures.";
+            typeWriter(taglineElement, tagline);
+
+            // Set up scroll animations
+            window.addEventListener('scroll', handleScroll);
+            handleScroll(); // Initial check
+
+            // Simple form submission handler (prevents page reload)
+            document.getElementById('contactForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                // In a real app, this would send data to a backend server (e.g., Django endpoint).
+                const name = document.getElementById('contactName').value;
+                const email = document.getElementById('contactEmail').value;
+                const message = document.getElementById('contactMessage').value;
+                
+                alert(`Thank you for your message, ${name}! Your inquiry has been processed (Email: ${email}, Message: ${message}).\n\nNote: This is a static portfolio submission handler and does not actually send an email.`);
+                this.reset();
+            });
+        });
+    </script>
+
+</body>
+</html>
