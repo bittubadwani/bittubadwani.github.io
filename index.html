@@ -127,7 +127,7 @@
             width: 20px;
             height: 20px;
             animation: spin 1s linear infinite;
-            margin-right: 8px;
+            margin-left: 8px;
         }
 
         @keyframes spin {
@@ -178,7 +178,7 @@
             <div class="w-full lg:w-1/3 flex justify-center lg:justify-end items-center mt-8 lg:mt-0">
                 <div class="hero-image-container w-64 h-64 sm:w-80 sm:h-80 relative">
                     <!-- IMPORTANT: Replace the src below with your actual image URL/path -->
-                    <img src="IMG_20251105_024921.jpg" alt="Shiva - Cybersecurity Researcher" class="hero-image object-cover w-full h-full">
+                    <img src="https://placehold.co/500x500/0d1117/00e0ff?text=Shiva's+Profile" alt="Shiva - Cybersecurity Researcher" class="hero-image object-cover w-full h-full">
                     <div class="scanline-overlay"></div>
                 </div>
             </div>
@@ -318,8 +318,9 @@
                 <div class="flex flex-col sm:flex-row gap-4">
                     <input type="text" id="projectTopicInput" placeholder="Enter topic (e.g., IoT Security, Web3 Audits)" class="flex-grow p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-neon-blue focus:border-neon-blue transition duration-200">
                     <button id="generateIdeaButton" onclick="generateProjectIdea()" class="flex-shrink-0 flex items-center justify-center px-6 py-3 bg-green-500 text-gray-900 font-bold rounded-lg hover:bg-green-400 transition duration-300 disabled:opacity-50">
-                        <span id="ideaButtonText">Generate Idea &rarr;</span>
+                        <span id="ideaButtonText">Generate Idea</span>
                         <div id="ideaLoader" class="loader hidden"></div>
+                        <span class="ml-2">&rarr;</span>
                     </button>
                 </div>
                 <div id="projectIdeaOutput" class="mt-4 p-4 bg-gray-800 rounded-lg border border-gray-700 min-h-12 hidden">
@@ -363,7 +364,13 @@
                     <p class="text-gray-400 mb-4 text-sm">Role-based access system with live monitoring features and seamless REST API integration (Flask → Django Migration Ready).</p>
                     <p class="text-xs text-gray-500 font-mono">Technologies: Flask/Django, HTML/Tailwind, REST API.</p>
                 </div>
-                
+
+                <!-- Project 6: Custom Admin Dashboard --><div class="project-card p-6 bg-gray-800 rounded-xl border border-gray-700">
+                    <h3 class="text-xl font-bold text-white mb-2">Security Research & Documentation</h3>
+                    <p class="text-gray-400 mb-4 text-sm">Comprehensive reports on zero-day vulnerabilities in common IoT devices and Android OS patches.</p>
+                    <p class="text-xs text-gray-500 font-mono">Technologies: Markdown, LaTeX, Documentation, Exploit Analysis.</p>
+                </div>
+
             </div>
         </section>
 
@@ -467,13 +474,17 @@
 
         /**
          * Generic fetch wrapper with exponential backoff for API robustness.
-         * @param {string} url - The API endpoint URL.
+         * FIX: Ensures the API_KEY is explicitly appended to the URL.
+         * @param {string} modelName - The model name to use (e.g., LLM_MODEL or TTS_MODEL).
+         * @param {string} endpoint - The endpoint suffix (e.g., ':generateContent').
          * @param {object} payload - The request body payload.
          * @param {number} maxRetries - Maximum number of retries.
          * @param {number} delay - Initial delay in milliseconds.
          * @returns {Promise<object>} Parsed JSON response.
          */
-        async function exponentialBackoffFetch(url, payload, maxRetries = 5, delay = 1000) {
+        async function exponentialBackoffFetch(modelName, endpoint, payload, maxRetries = 5, delay = 1000) {
+            const url = `${BASE_API_URL}${modelName}${endpoint}?key=${API_KEY}`;
+
             for (let i = 0; i < maxRetries; i++) {
                 try {
                     const response = await fetch(url, {
@@ -490,7 +501,7 @@
                         delay *= 2; // Exponential backoff
                     } else {
                         // Non-retryable error or last retry failed
-                        const errorData = await response.json();
+                        const errorData = await response.json().catch(() => ({ error: { message: response.statusText } }));
                         throw new Error(`API Error: ${response.status} - ${errorData.error.message}`);
                     }
                 } catch (error) {
@@ -580,7 +591,6 @@
             outputText.textContent = '';
             outputSources.innerHTML = '';
 
-            const apiUrl = `${BASE_API_URL}${LLM_MODEL}:generateContent?key=${API_KEY}`;
             const userQuery = `Generate a cutting-edge, practical cybersecurity project idea focused on ${topic}.`;
 
             const systemPrompt = "You are a creative, world-class cybersecurity research mentor. Your goal is to provide a concise, single, highly innovative and practical cybersecurity project idea in a single paragraph (maximum 100 words). The idea must be based on current, real-time threats and include 3-5 suggested technologies or frameworks (e.g., Python, Docker, specific protocols).";
@@ -592,7 +602,8 @@
             };
 
             try {
-                const result = await exponentialBackoffFetch(apiUrl, payload);
+                // Use the corrected fetch function
+                const result = await exponentialBackoffFetch(LLM_MODEL, ':generateContent', payload);
                 const candidate = result.candidates?.[0];
 
                 if (candidate && candidate.content?.parts?.[0]?.text) {
@@ -627,7 +638,7 @@
                 outputDiv.classList.remove('hidden');
             } finally {
                 button.disabled = false;
-                buttonText.textContent = 'Generate Idea →';
+                buttonText.textContent = 'Generate Idea';
                 loader.classList.add('hidden');
             }
         }
@@ -637,7 +648,7 @@
 
         async function draftAndSpeakResponse() {
             const messageInput = document.getElementById('contactMessage');
-            const message = messageInput.value.trim();
+            const message = document.getElementById('contactMessage').value; // Get the latest message
             const draftOutput = document.getElementById('draftOutput');
             const draftError = document.getElementById('draftErrorMessage');
             const ttsAudio = document.getElementById('ttsAudio');
@@ -650,7 +661,7 @@
             ttsAudio.classList.add('hidden');
             ttsAudio.src = '';
 
-            if (message.length < 10) {
+            if (message.trim().length < 10) {
                 draftError.textContent = 'Please enter a detailed message (at least 10 characters) to draft a response.';
                 draftError.classList.remove('hidden');
                 return;
@@ -662,14 +673,14 @@
 
             try {
                 // 1. Generate Text Draft
-                const textApiUrl = `${BASE_API_URL}${LLM_MODEL}:generateContent?key=${API_KEY}`;
                 const userQuery = `Draft a warm, professional, and confident response to the following inquiry: "${message}". Ensure the draft response is concise (max 3 sentences) and highlights my relevant expertise in ethical hacking and full-stack development.`;
 
                 const textPayload = {
                     contents: [{ parts: [{ text: userQuery }] }],
                 };
 
-                const textResult = await exponentialBackoffFetch(textApiUrl, textPayload);
+                // Use the corrected fetch function
+                const textResult = await exponentialBackoffFetch(LLM_MODEL, ':generateContent', textPayload);
                 const draftText = textResult.candidates?.[0]?.content?.parts?.[0]?.text;
 
                 if (!draftText) {
@@ -680,8 +691,6 @@
                 draftOutput.classList.remove('hidden');
 
                 // 2. Generate TTS Audio from Draft
-                const ttsApiUrl = `${BASE_API_URL}${TTS_MODEL}:generateContent?key=${API_KEY}`;
-                
                 const ttsPayload = {
                     contents: [{ parts: [{ text: draftText }] }],
                     generationConfig: {
@@ -695,7 +704,8 @@
                     },
                 };
 
-                const ttsResult = await exponentialBackoffFetch(ttsApiUrl, ttsPayload);
+                // Use the corrected fetch function
+                const ttsResult = await exponentialBackoffFetch(TTS_MODEL, ':generateContent', ttsPayload);
 
                 const part = ttsResult.candidates?.[0]?.content?.parts?.[0];
                 const audioData = part?.inlineData?.data;
@@ -771,8 +781,17 @@
                 const email = document.getElementById('contactEmail').value;
                 const message = document.getElementById('contactMessage').value;
                 
-                alert(`Thank you for your message, ${name}! Your inquiry has been processed (Email: ${email}, Message: ${message}).\n\nNote: This is a static portfolio submission handler and does not actually send an email.`);
+                // Use custom modal or console log instead of alert()
+                console.log(`Form Submitted: Name: ${name}, Email: ${email}, Message: ${message}`);
+                
+                // Replace with custom UI feedback
+                const draftError = document.getElementById('draftErrorMessage');
+                draftError.className = 'p-3 bg-green-900/50 rounded-lg text-green-300 text-sm';
+                draftError.textContent = `Thank you, ${name}! Your inquiry has been processed. (Note: This is a static portfolio submission handler.)`;
+                draftError.classList.remove('hidden');
+
                 this.reset();
+                setTimeout(() => draftError.classList.add('hidden'), 5000);
             });
         });
     </script>
