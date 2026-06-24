@@ -6,12 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kamlesh's Cybersecurity Portfolio</title>
 
-    <!-- favicon  -->
     <link rel="icon" type="image/png" href="favicon_cropped.png">
 
-    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Use Inter font family -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
@@ -62,7 +59,7 @@
 
         .project-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(0, 224, 255, 0.5);
+            box-shadow: 0 0 20px rgba(0, 224, 255, 0.4);
             /* Neon glow on hover */
             border-color: #00e0ff;
         }
@@ -178,12 +175,26 @@
                 background-position: 0 100%;
             }
         }
+
+        /* Customized stream tracking inside timeline container */
+        .terminal-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .terminal-scroll::-webkit-scrollbar-track {
+            background: #0d1117;
+        }
+        .terminal-scroll::-webkit-scrollbar-thumb {
+            background: #21262d;
+            border-radius: 3px;
+        }
+        .terminal-scroll::-webkit-scrollbar-thumb:hover {
+            background: #30363d;
+        }
     </style>
 </head>
 
 <body class="selection:bg-neon-blue selection:text-gray-900">
 
-    <!-- Navbar -->
     <nav class="sticky top-0 z-50 bg-gray-900/90 backdrop-blur-sm shadow-lg border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -197,29 +208,38 @@
                         class="text-gray-300 hover:text-neon-blue px-3 py-2 rounded-md text-sm font-medium transition duration-150">Skills</a>
                     <a href="#projects"
                         class="text-gray-300 hover:text-neon-blue px-3 py-2 rounded-md text-sm font-medium transition duration-150">Projects</a>
+                    <a href="#timeline-sec"
+                        class="text-gray-300 hover:text-neon-blue px-3 py-2 rounded-md text-sm font-medium transition duration-150">Timeline</a>
+                    <a href="#academic"
+                        class="text-gray-300 hover:text-neon-blue px-3 py-2 rounded-md text-sm font-medium transition duration-150">Academic</a>
                     <a href="#contact"
                         class="text-gray-300 hover:text-neon-blue px-3 py-2 rounded-md text-sm font-medium transition duration-150">Contact</a>
                 </div>
-                <!-- Mobile menu button (omitted for brevity, but recommended for production) -->
             </div>
         </div>
     </nav>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
 
-        <!-- 🎯 HERO SECTION -->
         <section id="hero"
             class="min-h-[80vh] flex flex-col-reverse lg:flex-row justify-center items-center lg:items-start pt-16 gap-12 scroll-reveal">
 
             <div class="w-full lg:w-2/3 flex flex-col justify-center items-start text-center lg:text-left">
                 <p class="text-xl sm:text-2xl text-gray-400 mb-4 font-mono">Hi, I’m <span class="text-neon-blue">Kamlesh
                         Badvani</span> —</p>
-                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6">
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-4">
                     Cybersecurity Researcher, <br>
                     Ethical Hacker & Full-Stack Developer.
                 </h1>
+
+                <div class="mb-6 p-3 bg-gray-900/60 border-l-2 border-amber-500/70 rounded-r-lg max-w-3xl text-left">
+                    <p class="text-xs font-mono text-gray-400">
+                        <span class="text-amber-500 font-bold">![IDENTITY_VERIFICATION]:</span> Certifications issued prior to 2026 may bear my former structural legal identifier, <span class="text-gray-200 font-semibold underline decoration-amber-500/40">Kamlesh Malviya</span>. All mappings reference back strictly to this single validated cryptographic portfolio identity.
+                    </p>
+                </div>
+
                 <p id="tagline" class="text-2xl sm:text-3xl lg:text-4xl font-semibold text-gray-300 min-h-10"></p>
-                <p class="mt-8 text-lg sm:text-xl text-gray-500 max-w-3xl">
+                <p class="mt-4 text-lg sm:text-xl text-gray-500 max-w-3xl">
                     I build secure, intelligent systems that protect people in the real world.
                     My work spans Android security, custom firewall systems, cloud-based monitoring platforms, and
                     advanced network defense automation.
@@ -232,7 +252,6 @@
 
             <div class="w-full lg:w-1/3 flex justify-center lg:justify-end items-center mt-8 lg:mt-0">
                 <div class="hero-image-container w-64 h-64 sm:w-80 sm:h-80 relative">
-                    <!-- Placeholder: Keep this URL as requested -->
                     <img src="profile.jpg" alt="Kamlesh Badvani - Cybersecurity Researcher"
                         class="hero-image object-cover w-full h-full"
                         onerror="this.onerror=null; this.src='https://placehold.co/320x320/0f172a/00e0ff?text=K.B.'">
@@ -241,10 +260,9 @@
             </div>
         </section>
 
-        <!-- 👤 ABOUT ME SECTION -->
         <section id="about" class="pt-10 scroll-reveal">
             <h2 class="text-3xl sm:text-4xl font-bold mb-8 border-b-2 border-neon-blue/50 pb-2">
-                <span class="neon-blue"></span> About Me
+                About Me
             </h2>
             <div class="grid md:grid-cols-2 gap-12">
                 <div class="space-y-6 text-gray-300 text-lg">
@@ -280,22 +298,17 @@
             </div>
         </section>
 
-        <!-- 🚀 WHAT I DO / SERVICES SECTION -->
         <section id="services" class="pt-10 scroll-reveal">
             <h2 class="text-3xl sm:text-4xl font-bold mb-12 text-center">
-                <span class="neon-blue"></span> What I Do
+                What I Do
             </h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-                <!-- Service Card 1: Ethical Hacking -->
-                <div
-                    class="p-6 bg-gray-800 border border-gray-700 rounded-xl shadow-lg hover:border-neon-blue transition duration-300 group">
+                <div class="p-6 bg-gray-800 border border-gray-700 rounded-xl shadow-lg hover:border-neon-blue transition duration-300 group">
                     <div class="text-3xl neon-blue mb-4 group-hover:scale-105 transition duration-300">
-                        <!-- Icon for Hacking -->
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8">
-                            <path
-                                d="M14.5 10c-.8-.6-1.3-2-2-3-.3-.7-.6-1.4-.7-2.1l-.1-.9C11.3 3 10 2 9 2H7c-1.1 0-2 .9-2 2v1l-.4.3C4.2 5.7 4 6.3 4 7c0 .4-.1.8-.3 1.2-.2.4-.5.7-.9.9-.4.2-.8.3-1.3.3L2 9.5c.3 1.1.7 2.1 1.2 3.1.5 1 1 1.9 1.7 2.8.7.9 1.5 1.7 2.3 2.5.8.8 1.6 1.5 2.5 2.1.9.6 1.8 1 2.8 1.4L13 22c.5-.1 1-.2 1.4-.4.4-.2.8-.5 1.1-.9.3-.4.5-.8.6-1.3.1-.5.1-1 .1-1.6V17c0-1.1-.9-2-2-2h-2c-.9 0-2-1.3-2-2.3v-2.1L12 11c.7-.6 1.2-1.3 1.5-2.2.3-.9.4-1.8.3-2.7L14.5 10z" />
+                            <path d="M14.5 10c-.8-.6-1.3-2-2-3-.3-.7-.6-1.4-.7-2.1l-.1-.9C11.3 3 10 2 9 2H7c-1.1 0-2 .9-2 2v1l-.4.3C4.2 5.7 4 6.3 4 7c0 .4-.1.8-.3 1.2-.2.4-.5.7-.9.9-.4.2-.8.3-1.3.3L2 9.5c.3 1.1.7 2.1 1.2 3.1.5 1 1 1.9 1.7 2.8.7.9 1.5 1.7 2.3 2.5.8.8 1.6 1.5 2.5 2.1.9.6 1.8 1 2.8 1.4L13 22c.5-.1 1-.2 1.4-.4.4-.2.8-.5 1.1-.9.3-.4.5-.8.6-1.3.1-.5.1-1 .1-1.6V17c0-1.1-.9-2-2-2h-2c-.9 0-2-1.3-2-2.3v-2.1L12 11c.7-.6 1.2-1.3 1.5-2.2.3-.9.4-1.8.3-2.7L14.5 10z" />
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-white mb-3">Ethical Hacking</h3>
@@ -303,11 +316,8 @@
                         Android/Network/system-level exploit research.</p>
                 </div>
 
-                <!-- Service Card 2: Full-Stack Development -->
-                <div
-                    class="p-6 bg-gray-800 border border-gray-700 rounded-xl shadow-lg hover:border-neon-blue transition duration-300 group">
+                <div class="p-6 bg-gray-800 border border-gray-700 rounded-xl shadow-lg hover:border-neon-blue transition duration-300 group">
                     <div class="text-3xl neon-blue mb-4 group-hover:scale-105 transition duration-300">
-                        <!-- Icon for Development -->
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8">
                             <polyline points="16 18 22 12 16 6" />
@@ -319,11 +329,8 @@
                         backend architecture.</p>
                 </div>
 
-                <!-- Service Card 3: Cloud Infrastructure -->
-                <div
-                    class="p-6 bg-gray-800 border border-gray-700 rounded-xl shadow-lg hover:border-neon-blue transition duration-300 group">
+                <div class="p-6 bg-gray-800 border border-gray-700 rounded-xl shadow-lg hover:border-neon-blue transition duration-300 group">
                     <div class="text-3xl neon-blue mb-4 group-hover:scale-105 transition duration-300">
-                        <!-- Icon for Cloud -->
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8">
                             <path d="M12 2v2" />
@@ -341,140 +348,52 @@
                     <p class="text-gray-400">Docker, VPS setup, Caddy, Nginx, SSL, Cloudflare, origin certificates,
                         reverse proxies.</p>
                 </div>
-
-                <!-- Service Card 4: Android Security -->
-                <!----  <div
-                    class="p-6 bg-gray-800 border border-gray-700 rounded-xl shadow-lg hover:border-neon-blue transition duration-300 group">
-                    <div class="text-3xl neon-blue mb-4 group-hover:scale-105 transition duration-300">
-                        Icon for Mobile
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8">
-                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
-                            <line x1="12" y1="18" x2="12.01" y2="18" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-3">Android Security</h3>
-                    <p class="text-gray-400">APK firewalls, real-time monitoring agents, VPN services, privacy-focused
-                        defense apps.</p>
-                </div> -->
-
-                <!-- Service Card 5: Cyber-Defense Automation -->
-                <!-- <div
-                    class="p-6 bg-gray-800 border border-gray-700 rounded-xl shadow-lg hover:border-neon-blue transition duration-300 group">
-                    <div class="text-3xl neon-blue mb-4 group-hover:scale-105 transition duration-300">
-                        Icon for Automation/Lightning
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8">
-                            <path
-                                d="M4 14a1 1 0 0 1-.78-1.63L14.33 1.06a1 1 0 0 1 1.76.62l-3.5 19.14a1 1 0 0 1-1.76-.62L4.78 14.37A1 1 0 0 1 4 14z" />
-                        </svg>
-                    </div> -->
-                <!-- <h3 class="text-xl font-semibold text-white mb-3">Cyber-Defense Automation</h3> -->
-                <!-- <p class="text-gray-400">Custom IDS/IPS, spoofing detection, hotspot monitoring, packet analysis,
-                        threat logging.</p>
-                </div> -->
-
-                <!-- Service Card 6: Security Research -->
-                <!-- <div
-                    class="p-6 bg-gray-800 border border-gray-700 rounded-xl shadow-lg hover:border-neon-blue transition duration-300 group">
-                    <div class="text-3xl neon-blue mb-4 group-hover:scale-105 transition duration-300">
-                        Icon for Research
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8">
-                            <path d="M17 19H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2z" />
-                            <path d="M12 8l-4 4 4 4" />
-                            <path d="M16 12h-8" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-3">Security Research</h3>
-                    <p class="text-gray-400">Advanced Android payload analysis, Wi-Fi security research (MITM
-                        detection), DVR and IoT penetration research, AI-assisted threat analysis.</p>
-                </div>
-            </div> -->
+            </div>
         </section>
 
-        <!-- 🔧 SKILLS SECTION -->
         <section id="skills" class="pt-10 scroll-reveal">
             <h2 class="text-3xl sm:text-4xl font-bold mb-8 border-b-2 border-neon-blue/50 pb-2">
-                <span class="neon-blue"></span> Core Skillset
+                Core Skillset
             </h2>
 
             <div class="space-y-6">
                 <p class="text-gray-400 text-lg">My expertise covers the full spectrum from exploiting vulnerabilities
                     to engineering secure, scalable solutions. Here is my operational stack:</p>
                 <div class="flex flex-wrap gap-4 text-sm">
-                    <!-- Security -->
-                    <span
-                        class="skill-tag px-4 py-2 bg-red-900/50 text-red-300 rounded-full border border-red-700 shadow-md">Ethical
-                        Hacking</span>
-                    <span
-                        class="skill-tag px-4 py-2 bg-red-900/50 text-red-300 rounded-full border border-red-700 shadow-md">Network
-                        Analysis</span>
-                    <span
-                        class="skill-tag px-4 py-2 bg-red-900/50 text-red-300 rounded-full border border-red-700 shadow-md">Android
-                        Security</span>
-                    <span
-                        class="skill-tag px-4 py-2 bg-red-900/50 text-red-300 rounded-full border border-red-700 shadow-md">PenTesting</span>
-                    <span
-                        class="skill-tag px-4 py-2 bg-red-900/50 text-red-300 rounded-full border border-red-700 shadow-md">MITRE
-                        ATT&CK</span>
-                    <span
-                        class="skill-tag px-4 py-2 bg-red-900/50 text-red-300 rounded-full border border-red-700 shadow-md">OSINT</span>
+                    <span class="skill-tag px-4 py-2 bg-red-900/50 text-red-300 rounded-full border border-red-700 shadow-md">Ethical Hacking</span>
+                    <span class="skill-tag px-4 py-2 bg-red-900/50 text-red-300 rounded-full border border-red-700 shadow-md">Network Analysis</span>
+                    <span class="skill-tag px-4 py-2 bg-red-900/50 text-red-300 rounded-full border border-red-700 shadow-md">Android Security</span>
+                    <span class="skill-tag px-4 py-2 bg-red-900/50 text-red-300 rounded-full border border-red-700 shadow-md">PenTesting</span>
+                    <span class="skill-tag px-4 py-2 bg-red-900/50 text-red-300 rounded-full border border-red-700 shadow-md">MITRE ATT&CK</span>
+                    <span class="skill-tag px-4 py-2 bg-red-900/50 text-red-300 rounded-full border border-red-700 shadow-md">OSINT</span>
 
-                    <!-- Backend/Languages -->
-                    <span
-                        class="skill-tag px-4 py-2 bg-green-900/50 text-green-300 rounded-full border border-green-700 shadow-md">Python</span>
-                    <span
-                        class="skill-tag px-4 py-2 bg-green-900/50 text-green-300 rounded-full border border-green-700 shadow-md">Django</span>
-                    <span
-                        class="skill-tag px-4 py-2 bg-green-900/50 text-green-300 rounded-full border border-green-700 shadow-md">Flask</span>
-                    <span
-                        class="skill-tag px-4 py-2 bg-green-900/50 text-green-300 rounded-full border border-green-700 shadow-md">PostgreSQL</span>
-                    <span
-                        class="skill-tag px-4 py-2 bg-green-900/50 text-green-300 rounded-full border border-green-700 shadow-md">REST
-                        APIs</span>
+                    <span class="skill-tag px-4 py-2 bg-green-900/50 text-green-300 rounded-full border border-green-700 shadow-md">Python</span>
+                    <span class="skill-tag px-4 py-2 bg-green-900/50 text-green-300 rounded-full border border-green-700 shadow-md">Django</span>
+                    <span class="skill-tag px-4 py-2 bg-green-900/50 text-green-300 rounded-full border border-green-700 shadow-md">Flask</span>
+                    <span class="skill-tag px-4 py-2 bg-green-900/50 text-green-300 rounded-full border border-green-700 shadow-md">PostgreSQL</span>
+                    <span class="skill-tag px-4 py-2 bg-green-900/50 text-green-300 rounded-full border border-green-700 shadow-md">REST APIs</span>
 
-                    <!-- DevOps/Cloud -->
-                    <span
-                        class="skill-tag px-4 py-2 bg-blue-900/50 text-blue-300 rounded-full border border-blue-700 shadow-md">Docker</span>
-                    <span
-                        class="skill-tag px-4 py-2 bg-blue-900/50 text-blue-300 rounded-full border border-blue-700 shadow-md">VPS
-                        Management</span>
-                    <span
-                        class="skill-tag px-4 py-2 bg-blue-900/50 text-blue-300 rounded-full border border-blue-700 shadow-md">Cloudflare</span>
-                    <span
-                        class="skill-tag px-4 py-2 bg-blue-900/50 text-blue-300 rounded-full border border-blue-700 shadow-md">Caddy/Nginx</span>
-                    <!-- <span
-                        class="skill-tag px-4 py-2 bg-blue-900/50 text-blue-300 rounded-full border border-blue-700 shadow-md">CI/CD</span> -->
+                    <span class="skill-tag px-4 py-2 bg-blue-900/50 text-blue-300 rounded-full border border-blue-700 shadow-md">Docker</span>
+                    <span class="skill-tag px-4 py-2 bg-blue-900/50 text-blue-300 rounded-full border border-blue-700 shadow-md">VPS Management</span>
+                    <span class="skill-tag px-4 py-2 bg-blue-900/50 text-blue-300 rounded-full border border-blue-700 shadow-md">Cloudflare</span>
+                    <span class="skill-tag px-4 py-2 bg-blue-900/50 text-blue-300 rounded-full border border-blue-700 shadow-md">Caddy/Nginx</span>
 
-                    <!-- Tools -->
-                    <!-- <span
-                        class="skill-tag px-4 py-2 bg-purple-900/50 text-purple-300 rounded-full border border-purple-700 shadow-md">Burp
-                        Suite</span> -->
-                    <span
-                        class="skill-tag px-4 py-2 bg-purple-900/50 text-purple-300 rounded-full border border-purple-700 shadow-md">Nmap</span>
-                    <span
-                        class="skill-tag px-4 py-2 bg-purple-900/50 text-purple-300 rounded-full border border-purple-700 shadow-md">Wireshark</span>
-                    <!-- <span
-                        class="skill-tag px-4 py-2 bg-purple-900/50 text-purple-300 rounded-full border border-purple-700 shadow-md">Suricata/Snort</span>
-                 -->
+                    <span class="skill-tag px-4 py-2 bg-purple-900/50 text-purple-300 rounded-full border border-purple-700 shadow-md">Nmap</span>
+                    <span class="skill-tag px-4 py-2 bg-purple-900/50 text-purple-300 rounded-full border border-purple-700 shadow-md">Wireshark</span>
                 </div>
             </div>
         </section>
 
-        <!-- 🧪 KEY PROJECTS SECTION -->
         <section id="projects" class="pt-10 scroll-reveal">
             <h2 class="text-3xl sm:text-4xl font-bold mb-8 border-b-2 border-neon-blue/50 pb-2">
-                <span class="neon-blue"></span> Key Projects
+                Key Projects
             </h2>
 
             <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
 
-                <!-- Project 1: Safenex Firewall (Featured) -->
-                <div class="project-card p-6 bg-gray-800 rounded-xl border border-gray-700 col-span-1 lg:col-span-2">
+                <div class="project-card p-6 bg-gray-800 border border-gray-700 rounded-xl col-span-1 lg:col-span-2">
                     <div>
-                        <span class="text-xs font-semibold uppercase tracking-wider text-green-400">Featured Project |
-                            2024–2025</span>
+                        <span class="text-xs font-semibold uppercase tracking-wider text-green-400">Featured Project | 2024–2025</span>
                         <h3 class="text-2xl font-bold text-white mt-2 mb-4 flex justify-between items-center">
                             Safenex Firewall
                             <span class="text-lg neon-blue">VPN / IDS/IPS</span>
@@ -484,281 +403,191 @@
                             against modern digital threats.</p>
                     </div>
                     <div>
-                        <p class="text-sm text-gray-500 font-mono mb-3">Technologies: Python, Django, PostgreSQL,
-                            Docker, WireGuard, Suricata.</p>
-                        <!-- Added Project Link (Real Link Placeholder) -->
-                        <a href="https://safenex.iiitkottayam.ac.in/" target="_blank"
-                            class="inline-flex items-center text-neon-blue font-semibold hover:text-white transition duration-200 group">
-                            Live Demo / Domain Link
-                            <!-- External Link Icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-4 w-4 ml-2 group-hover:translate-x-1 transition duration-200" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg>
-                        </a>
+                        <p class="text-sm text-gray-500 font-mono mb-4">Technologies: Python, Django, PostgreSQL, Docker, WireGuard, Suricata.</p>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="https://safenex.iiitkottayam.ac.in/" target="_blank"
+                                class="inline-flex items-center px-4 py-2 text-xs font-mono font-bold rounded bg-neon-blue text-gray-900 hover:bg-white transition duration-200">
+                                PROD_DEPLOY &rarr;
+                            </a>
+                            <a href="https://github.com/bittubadwani/Safenex" target="_blank"
+                                class="inline-flex items-center px-4 py-2 text-xs font-mono rounded bg-gray-700 text-gray-200 hover:bg-gray-600 transition duration-200">
+                                source_repo
+                            </a>
+                            <a href="https://github.com/bittubadwani/Safenex/blob/main/docs/security_audit.pdf" target="_blank"
+                                class="inline-flex items-center px-4 py-2 text-xs font-mono rounded border border-gray-700 text-gray-400 hover:text-white transition duration-200">
+                                security_audit
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Project 2: DeepShield -->
                 <div class="project-card p-6 bg-gray-800 rounded-xl border border-gray-700">
                     <div>
                         <h3 class="text-xl font-bold text-white mb-2">DeepShield — Deepfake Detection System</h3>
-                        <p class="text-gray-400 mb-4 text-sm">Backend for dataset automation, preprocessing, and model
-                            deployment pipeline.</p>
+                        <p class="text-gray-400 mb-4 text-sm">Backend execution engine built for deep learning video classification automation, multi-tier frame processing architectures, and validation pipelines.</p>
                     </div>
-                    <div>
-                        <p class="text-xs text-gray-500 font-mono mb-3">Technologies: Python, Data Processing, Flask,
-                            Cloud Deployment.</p>
-                        <!-- Added Project Link (Generic Placeholder) -->
-                        <a href="#"
-                            class="inline-flex items-center text-neon-blue font-semibold hover:text-white transition duration-200 group">
-                            View Code / Link
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-4 w-4 ml-2 group-hover:translate-x-1 transition duration-200" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg>
-                        </a>
+                    <div class="mt-4">
+                        <p class="text-xs text-gray-500 font-mono mb-4">Technologies: Python, Data Processing, Flask, Cloud Deployment.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="https://github.com/bittubadwani/DeepShield" target="_blank"
+                                class="inline-flex items-center px-3 py-1.5 text-xs font-mono rounded bg-gray-700 text-gray-200 hover:bg-gray-600 transition duration-200">
+                                source_repo
+                            </a>
+                            <a href="https://github.com/bittubadwani/DeepShield/blob/main/docs/technical_report.pdf" target="_blank"
+                                class="inline-flex items-center px-3 py-1.5 text-xs font-mono rounded border border-gray-700 text-gray-400 hover:text-white transition duration-200">
+                                tech_report
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Project 3: Wi-Fi Threat Analyzer -->
-                <!-- <div class="project-card p-6 bg-gray-800 rounded-xl border border-gray-700"> -->
-                <!-- <div>
-                        <h3 class="text-xl font-bold text-white mb-2">Wi-Fi Threat Analyzer</h3>
-                        <p class="text-gray-400 mb-4 text-sm">Python-based tool to analyze network anomalies and
-                            potential spoofing attempts in real-time.</p>
-                    </div> -->
-                <!-- <div>
-                        <p class="text-xs text-gray-500 font-mono mb-3">Technologies: Python, Scapy, Network Profiling,
-                            Automation.</p>
-                         Added Project Link (Generic Placeholder)
-                        <a href="#"
-                            class="inline-flex items-center text-neon-blue font-semibold hover:text-white transition duration-200 group">
-                            View Code / Link
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-4 w-4 ml-2 group-hover:translate-x-1 transition duration-200" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg>
-                        </a>
-                    </div>
-                </div> -->
-
-                <!-- Project 4: Cloud Automation Kit -->
-                <!--
                 <div class="project-card p-6 bg-gray-800 rounded-xl border border-gray-700">
                     <div>
-                        <h3 class="text-xl font-bold text-white mb-2">Cloud Automation Kit</h3>
-                        <p class="text-gray-400 mb-4 text-sm">A VPS-ready deployment framework engineered using Docker,
-                            Caddy (reverse proxy), and Cloudflare for scalable application deployment.</p>
+                        <h3 class="text-xl font-bold text-white mb-2">Quantum-Proof Systems Scanner</h3>
+                        <p class="text-gray-400 mb-4 text-sm">Post-Quantum Cryptography (PQC) readiness assessment engine executing passive and active remote cipher scans to determine cryptographic inventory posture.</p>
                     </div>
-                    <div>
-                        <p class="text-xs text-gray-500 font-mono mb-3">Technologies: Docker, Caddy, Cloudflare, Shell
-                            Scripting, DevOps.</p>
-                         Added Project Link (Generic Placeholder) 
-                        <a href="#"
-                            class="inline-flex items-center text-neon-blue font-semibold hover:text-white transition duration-200 group">
-                            View Code / Link
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-4 w-4 ml-2 group-hover:translate-x-1 transition duration-200" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg>
-                        </a>
+                    <div class="mt-4">
+                        <p class="text-xs text-gray-500 font-mono mb-4">Technologies: Python, Django, TLS Analysis, Cryptography, Bootstrap.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="https://github.com/bittubadwani/pqc-scanner" target="_blank"
+                                class="inline-flex items-center px-3 py-1.5 text-xs font-mono rounded bg-gray-700 text-gray-200 hover:bg-gray-600 transition duration-200">
+                                source_repo
+                            </a>
+                            <a href="https://github.com/bittubadwani/pqc-scanner/blob/main/docs/executive_summary.pdf" target="_blank"
+                                class="inline-flex items-center px-3 py-1.5 text-xs font-mono rounded border border-gray-700 text-gray-400 hover:text-white transition duration-200">
+                                exec_summary
+                            </a>
+                        </div>
                     </div>
                 </div>
-                -->
-                <!-- Project 5: Custom Admin Dashboard -->
-                <!-- <div class="project-card p-6 bg-gray-800 rounded-xl border border-gray-700">
-                        <div>
-                            <h3 class="text-xl font-bold text-white mb-2">Custom Admin Dashboard</h3>
-                            <p class="text-gray-400 mb-4 text-sm">Role-based access system with live monitoring features
-                                and
-                                seamless REST API integration (Flask → Django Migration Ready).</p>
-                        </div>
-                        <div>
-                            <p class="text-xs text-gray-500 font-mono mb-3">Technologies: Flask/Django, HTML/Tailwind,
-                                REST
-                                API.</p>
-                            Added Project Link (Generic Placeholder)
-                            <a href="#"
-                                class="inline-flex items-center text-neon-blue font-semibold hover:text-white transition duration-200 group">
-                                View Code / Link
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="h-4 w-4 ml-2 group-hover:translate-x-1 transition duration-200" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div> -->
-
-                <!-- Project 6: Security Research & Documentation -->
-                <!-- <div class="project-card p-6 bg-gray-800 rounded-xl border border-gray-700">
-                        <div>
-                            <h3 class="text-xl font-bold text-white mb-2">Security Research & Documentation</h3>
-                            <p class="text-gray-400 mb-4 text-sm">Comprehensive reports on zero-day vulnerabilities in
-                                common IoT devices and Android OS patches.</p>
-                        </div>
-                        <div>
-                            <p class="text-xs text-gray-500 font-mono mb-3">Technologies: Markdown, LaTeX,
-                                Documentation,
-                                Exploit Analysis.</p>
-                            Added Project Link (Generic Placeholder)
-                            <a href="#"
-                                class="inline-flex items-center text-neon-blue font-semibold hover:text-white transition duration-200 group">
-                                View Documentation
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="h-4 w-4 ml-2 group-hover:translate-x-1 transition duration-200" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div> -->
 
             </div>
         </section>
 
-        <!-- 🎓 ACADEMIC SIDE SECTION -->
+        <section id="timeline-sec" class="pt-10 scroll-reveal">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-8 border-b-2 border-neon-blue/50 pb-2">
+                Operational Timeline
+            </h2>
+            <div class="w-full bg-black rounded-lg border border-gray-800 overflow-hidden shadow-2xl">
+                <div class="bg-gray-900 px-4 py-3 flex items-center justify-between border-b border-gray-800">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        <span class="text-xs font-mono text-gray-500 ml-4">guest@badvani-node:~# cat docs/timeline.md</span>
+                    </div>
+                    <div class="text-xs font-mono text-gray-500 bg-gray-900/40 px-2 py-0.5 rounded border border-gray-800">STREAMING_LIVE</div>
+                </div>
+                <div class="p-6 font-mono text-sm text-green-400 terminal-scroll overflow-y-auto max-h-80 bg-[#05070c]" id="terminal-content">
+                    <p class="text-gray-500 mb-2">// Fetching cryptographic system milestones...</p>
+                    <div class="space-y-4">
+                        <p><span class="text-neon-blue font-bold">[Q1_2026]</span> Developed post-quantum cryptographic validation framework prototype.</p>
+                        <p><span class="text-neon-blue font-bold">[Q4_2025]</span> Implemented cross-platform VPN network synchronization matrix in Safenex architecture.</p>
+                        <p><span class="text-neon-blue font-bold">[Q3_2025]</span> Completed automated ML pipeline mapping logic for frame classification inside DeepShield framework.</p>
+                        <p><span class="text-gray-600 font-bold">[SYSTEM]</span> To read detailed repository documentation trace updates, verify root branch tracks manually.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="academic" class="pt-10 scroll-reveal">
             <h2 class="text-3xl sm:text-4xl font-bold mb-8 border-b-2 border-neon-blue/50 pb-2">
-                <span class="neon-blue"></span> Academic & Certifications
+                Academic & Certifications
             </h2>
 
-            <!-- EDUCATION (2 column grid stays here) -->
             <div class="grid md:grid-cols-2 gap-12 text-gray-300">
-
                 <div class="space-y-4">
                     <h3 class="text-xl font-semibold neon-blue mb-3">Education & Background</h3>
-
                     <p class="text-lg">
                         <b>B.Tech Computer Science and Engineering</b> with Specialization in <b>Cybersecurity</b> from
                         <b>Indian Institute of Information Technology (Kottayam)</b>.
                     </p>
-
                     <ul class="list-disc list-inside ml-4 space-y-2 text-gray-400">
-                        <li>Focus on cryptography, network security, and secure software development.</li>
-                        <li>GPA: 6.0</li>
+                        <li>Advanced coursework focusing on architecture cryptography, systems security parameters, and intrusion detection frameworks.</li>
+                        <li>Engaged heavily in specialized secure defensive code compilation paradigms.</li>
                     </ul>
                 </div>
-
             </div>
 
-            <!-- ✅ FULL WIDTH CERTIFICATIONS -->
             <div class="mt-12 space-y-4">
-
-                <h3 class="text-xl font-semibold neon-blue mb-3">Key Certifications</h3>
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
+                    <h3 class="text-xl font-semibold neon-blue">Key Certifications</h3>
+                    <a href="https://github.com/bittubadwani/portfolio/tree/main/certifications" target="_blank"
+                        class="px-4 py-2 rounded text-xs font-mono font-bold bg-gray-800 border border-neon-blue text-neon-blue hover:bg-neon-blue hover:text-gray-900 shadow-[0_0_10px_rgba(0,224,255,0.1)] transition duration-200">
+                        vault://view_all_certifications
+                    </a>
+                </div>
 
                 <ul class="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
-
-                    <!-- ⭐ FEATURED -->
-                    <li
-                        class="p-3 bg-gray-800 rounded-lg border border-neon-blue shadow-[0_0_10px_rgba(0,224,255,0.3)]">
+                    <li class="p-3 bg-gray-800 rounded-lg border border-neon-blue shadow-[0_0_10px_rgba(0,224,255,0.2)]">
                         <p class="font-semibold text-white">
                             Careers in Cybersecurity — Cybrary
                             <span class="text-xs text-neon-blue ml-2">★ Featured</span>
                         </p>
-                        <p class="text-sm text-gray-500">
-                            Overview of cybersecurity roles and real-world career pathways.
-                        </p>
-                        <p class="text-xs text-gray-600 mt-1">Issued: Jan 2026</p>
+                        <p class="text-sm text-gray-500 mb-2">Overview of cybersecurity roles and real-world career pathways.</p>
+                        <a href="https://github.com/bittubadwani/portfolio/blob/main/certifications/cybrary_careers_cybersecurity.pdf" target="_blank" class="text-xs font-mono neon-blue hover:underline">verify_credential_source &rarr;</a>
                     </li>
 
-                    <!-- ⭐ FEATURED -->
-                    <li
-                        class="p-3 bg-gray-800 rounded-lg border border-neon-blue shadow-[0_0_10px_rgba(0,224,255,0.3)]">
+                    <li class="p-3 bg-gray-800 rounded-lg border border-neon-blue shadow-[0_0_10px_rgba(0,224,255,0.2)]">
                         <p class="font-semibold text-white">
                             OSINT — Cybrary
                             <span class="text-xs text-neon-blue ml-2">★ Featured</span>
                         </p>
-                        <p class="text-sm text-gray-500">
-                            Information gathering and cyber threat intelligence fundamentals.
-                        </p>
-                        <p class="text-xs text-gray-600 mt-1">Issued: Nov 2025</p>
+                        <p class="text-sm text-gray-500 mb-2">Information gathering and cyber threat intelligence fundamentals.</p>
+                        <a href="https://github.com/bittubadwani/portfolio/blob/main/certifications/cybrary_osint.pdf" target="_blank" class="text-xs font-mono neon-blue hover:underline">verify_credential_source &rarr;</a>
                     </li>
 
-                    <!-- Normal -->
                     <li class="p-3 bg-gray-800 rounded-lg border border-gray-700">
                         <p class="font-semibold text-white">MITRE ATT&CK Framework — Cybrary</p>
-                        <p class="text-sm text-gray-500">
-                            Understanding adversary tactics and threat modeling.
-                        </p>
-                        <p class="text-xs text-gray-600 mt-1">Issued: Sep 2025</p>
+                        <p class="text-sm text-gray-500 mb-2">Understanding adversary tactics and threat modeling matrix layers.</p>
+                        <a href="https://github.com/bittubadwani/portfolio/blob/main/certifications/cybrary_mitre_attack.pdf" target="_blank" class="text-xs font-mono text-gray-500 hover:text-white hover:underline">verify_credential_source &rarr;</a>
                     </li>
 
-                    <!-- Normal -->
                     <li class="p-3 bg-gray-800 rounded-lg border border-gray-700">
                         <p class="font-semibold text-white">Introduction to Cybersecurity — EdX</p>
-                        <p class="text-sm text-gray-500">
-                            Core cybersecurity concepts and system protection.
-                        </p>
-                        <p class="text-xs text-gray-600 mt-1">Issued: Aug 2025</p>
+                        <p class="text-sm text-gray-500 mb-2">Core cybersecurity concepts and defensive engineering.</p>
+                        <a href="https://github.com/bittubadwani/portfolio/blob/main/certifications/edx_intro_cybersecurity.pdf" target="_blank" class="text-xs font-mono text-gray-500 hover:text-white hover:underline">verify_credential_source &rarr;</a>
                     </li>
 
-                    <!-- Normal -->
                     <li class="p-3 bg-gray-800 rounded-lg border border-gray-700">
                         <p class="font-semibold text-white">DEF CON Srinagar 0x0 — Participation</p>
-                        <p class="text-sm text-gray-500">
-                            Exposure to real-world cybersecurity discussions.
-                        </p>
-                        <p class="text-xs text-gray-600 mt-1">Issued: Apr 2025</p>
+                        <p class="text-sm text-gray-500 mb-2">Exposure to offensive attack strategies and elite defense discussion.</p>
+                        <a href="https://github.com/bittubadwani/portfolio/blob/main/certifications/defcon_srinagar_participation.pdf" target="_blank" class="text-xs font-mono text-gray-500 hover:text-white hover:underline">verify_credential_source &rarr;</a>
                     </li>
-
                 </ul>
-
             </div>
-
         </section>
 
-        <!-- 📧 CONTACT SECTION (Simplified/Refined) -->
         <section id="contact" class="pt-10 scroll-reveal">
             <h2 class="text-3xl sm:text-4xl font-bold mb-8 border-b-2 border-neon-blue/50 pb-2 text-center">
-                <span class="neon-blue"></span> Connect and Collaborate
+                Connect and Collaborate
             </h2>
-            <div
-                class="max-w-xl mx-auto p-8 bg-gray-900 rounded-xl shadow-2xl border border-gray-700 text-center space-y-6">
+            <div class="max-w-xl mx-auto p-8 bg-gray-900 rounded-xl shadow-2xl border border-gray-700 text-center space-y-6">
                 <p class="text-gray-400 text-lg">
                     I am actively seeking opportunities for challenging projects, security consulting, and full-time
                     engineering roles. Let's build secure solutions together.
                 </p>
 
-                <!-- Direct Email Link -->
                 <a href="mailto:cybervenomx.dev@gmail.com"
                     class="inline-flex items-center justify-center w-full px-8 py-3 text-lg font-semibold rounded-lg bg-neon-blue text-gray-900 shadow-xl transition duration-300 hover:scale-[1.01] hover:shadow-[0_0_35px_rgba(0,224,255,0.9)]">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" viewBox="0 0 24 24"
-                        fill="currentColor">
-                        <path
-                            d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z" />
                     </svg>
                     Send me an Email
                 </a>
             </div>
 
-            <!-- Social Media Links (Updated with real URLs) -->
             <div class="flex justify-center mt-10 space-x-6 text-2xl">
                 <a href="https://www.linkedin.com/in/kamlesh-badvani-06330531a" target="_blank"
                     class="text-gray-400 hover:text-neon-blue transition duration-300" aria-label="LinkedIn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
-                        fill="currentColor" class="w-7 h-7">
-                        <path
-                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.534-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.761 7 2.761v6.474z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.534-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.761 7 2.761v6.474z" />
                     </svg>
                 </a>
                 <a href="https://github.com/bittubadwani" target="_blank"
                     class="text-gray-400 hover:text-neon-blue transition duration-300" aria-label="GitHub">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
-                        fill="currentColor" class="w-7 h-7">
-                        <path
-                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.087-.731.084-.716.084-.716 1.205.084 1.839 1.237 1.839 1.237 1.07 1.833 2.807 1.304 3.492.997.107-.775.418-1.304.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.465-2.381 1.236-3.221-.124-.305-.535-1.518.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.658.242 2.871.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.923.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.563 21.82 24 17.327 24 12c0-6.627-5.373-12-12-12z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.087-.731.084-.716.084-.716 1.205.084 1.839 1.237 1.839 1.237 1.07 1.833 2.807 1.304 3.492.997.107-.775.418-1.304.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.465-2.381 1.236-3.221-.124-.305-.535-1.518.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.658.242 2.871.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.923.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.563 21.82 24 17.327 24 12c0-6.627-5.373-12-12-12z" />
                     </svg>
                 </a>
             </div>
@@ -771,15 +600,8 @@
         <p class="mt-2">Inspired by the Cyber-Noir aesthetic.</p>
     </footer>
 
-    <!-- JavaScript Logic -->
     <script>
-        /**
-         * The remaining JavaScript handles the cosmetic animations (typing effect, scroll reveals).
-         * The static contact form logic was removed as requested.
-         */
-
-        // --- Core Functions ---
-
+        // --- Core Animation Functions ---
         function typeWriter(element, text, i = 0) {
             if (i < text.length) {
                 element.textContent += text.charAt(i);
@@ -801,22 +623,64 @@
             });
         }
 
-        // --- Initialization ---
+        // --- Timeline Runtime Loader Matrix ---
+        async function loadTimelineStream() {
+            const terminalContainer = document.getElementById('terminal-content');
+            const timelineSourceUrl = 'docs/timeline.md';
 
+            try {
+                const response = await fetch(timelineSourceUrl);
+                if (!response.ok) throw new Error('Resource unreadable or path not found');
+                
+                const rawMarkdownText = await response.text();
+                
+                // Pure high-speed raw extraction array processing for clean visualization without external libs
+                const lines = rawMarkdownText.split('\n');
+                let stylizedHtmlOutput = '';
+                
+                lines.forEach(line => {
+                    let sanitizedLine = line.trim();
+                    if (!sanitizedLine) return;
+
+                    // Parse header milestones: e.g. "### [Q1 2026]"
+                    if (sanitizedLine.startsWith('###') || sanitizedLine.startsWith('##')) {
+                        stylizedHtmlOutput += `<p class="text-neon-blue font-bold mt-4 border-b border-gray-900 pb-1">${sanitizedLine.replace(/###|##/g, '').trim()}</p>`;
+                    } 
+                    // Parse list item blocks: e.g. "- Milestone text"
+                    else if (sanitizedLine.startsWith('-') || sanitizedLine.startsWith('*')) {
+                        stylizedHtmlOutput += `<p class="text-gray-300 ml-4"><span class="text-green-500 mr-2">&gt;</span>${sanitizedLine.substring(1).trim()}</p>`;
+                    } 
+                    // Base fallback line rendering
+                    else {
+                        stylizedHtmlOutput += `<p class="text-gray-400 text-xs my-1">${sanitizedLine}</p>`;
+                    }
+                });
+
+                if (stylizedHtmlOutput.trim().length > 0) {
+                    terminalContainer.innerHTML = stylizedHtmlOutput;
+                }
+            } catch (err) {
+                console.log("Local path stream blocked or processing via inline safe state matrix configuration.");
+                // Retains system fallback markup if raw asset loading returns code execution errors
+            }
+        }
+
+        // --- Initialization Execution Trigger ---
         window.onload = function () {
             // 1. Start Typing Effect
             const taglineElement = document.getElementById('tagline');
             const taglineText = "I defend systems, from networks to devices.";
             typeWriter(taglineElement, taglineText);
 
-            // 2. Initial Scroll Reveal check
+            // 2. Load Timeline MD File Assets asynchronously
+            loadTimelineStream();
+
+            // 3. Initial Scroll Reveal check
             handleScroll();
         }
 
-        // 3. Attach Scroll Reveal Listener
+        // Attach Scroll Reveal Listener
         window.addEventListener('scroll', handleScroll);
-
-        // --- End of Script ---
     </script>
 </body>
 
