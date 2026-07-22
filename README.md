@@ -6,7 +6,7 @@ This repository contains the source code for my personal portfolio website, host
 
 ## About Me
 
-I am a Computer Science and Engineering (Cybersecurity) student at IIIT Kottayam with interests in:
+I am a Bachelor of Cybersecurity student at IIT Kanpur with interests in:
 
 - Cybersecurity
 - Backend Development
